@@ -3,51 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Алиҷон – Full-Stack Developer</title>
+  <title>Алиҷон • Full-Stack Developer</title>
+  <meta name="description" content="Алиҷон — Full-Stack барномасоз аз Душанбе. Python, React, Node.js, AI ва 40+ лоиҳаи тиҷоратӣ">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://unpkg.com/scrollreveal"></script>
+  
+  <script src="https://unpkg.com/scrollreveal@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
   <style>
     :root {
-      --primary: #00d4ff;    /* кабуди неон */
-      --accent: #39ff14;     /* сабзи неон */
-      --bg: #0b1120;
-      --card: rgba(20, 25, 50, 0.6);
+      --primary: #00e0ff;
+      --accent: #39ff14;
+      --bg-dark: #0a0e17;
+      --bg-card: rgba(15, 20, 40, 0.55);
       --text: #e0f2fe;
-      --text-light: #94b6cc;
+      --text-muted: #94b8d4;
+      --gradient: linear-gradient(135deg, #00e0ff, #39ff14);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: 'Inter', 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      transition: all 0.4s;
+    [data-theme="light"] {
+      --bg-dark: #f8f9ff;
+      --bg-card: rgba(255, 255, 255, 0.75);
+      --text: #0f172a;
+      --text-muted: #475569;
     }
 
-    /* Language Switcher */
-    .lang-switch {
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      transition: 0.5s;
+    }
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; }
+
+    /* Custom Cursor */
+    .cursor { position: fixed; width: 20px; height: 20px; background: var(--primary); border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); z-index: 9999; mix-blend-mode: difference; transition: 0.15s; }
+    .cursor-follower { position: fixed; width: 50px; height: 50px; border: 2px solid var(--primary); border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%); z-index: 9998; transition: 0.6s; }
+
+    #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+    .switcher {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 25px;
+      right: 25px;
       z-index: 1000;
-      background: rgba(20,25,50,0.8);
-      backdrop-filter: blur(10px);
+      display: flex;
+      gap: 12px;
+      background: rgba(15,20,40,0.7);
+      backdrop-filter: blur(15px);
+      padding: 10px 14px;
       border-radius: 50px;
-      padding: 8px;
       border: 1px solid var(--primary);
     }
-    .lang-switch button {
-      background: none;
-      border: none;
-      color: var(--text-light);
-      padding: 8px 14px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-weight: bold;
+    .switcher button {
+      background: none; border: none; color: var(--text-muted); font-weight: bold; padding: 8px 14px; border-radius: 50px; cursor: pointer; transition: 0.3s;
     }
-    .lang-switch button.active {
-      background: var(--primary);
-      color: #000;
+    .switcher button.active, .switcher button:hover {
+      background: var(--primary); color: #000;
     }
 
     header {
@@ -56,219 +73,428 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      background: linear-gradient(-45deg, #0b1120, #1e293b, #0f172a, #0b1120);
-      background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
       position: relative;
     }
-    @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-
-    .hero-content h1 {
-      font-size: 4.8rem;
+    .hero h1 {
+      font-size: 6rem;
       font-weight: 900;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 60px rgba(0, 224, 255, 0.5);
     }
-    .hero-content p {
-      font-size: 1.6rem;
-      color: var(--text-light);
-      margin: 20px 0 40px;
+    .hero p {
+      font-size: 1.8rem;
+      color: var(--accent);
+      margin: 25px 0;
     }
-    .btn {
-      padding: 16px 40px;
-      background: linear-gradient(45deg, var(--primary), var(--accent));
+    .typed-text { font-size: 2.2rem; color: var(--accent); min-height: 70px; }
+    .btn-primary {
+      padding: 20px 55px;
+      background: var(--gradient);
       color: #000;
+      font-weight: bold;
       border: none;
       border-radius: 50px;
-      font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       cursor: pointer;
+      box-shadow: 0 0 50px rgba(0, 224, 255, 0.6);
       transition: all 0.4s;
-      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
     }
-    .btn:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6); }
+    .btn-primary:hover {
+      transform: translateY(-12px) scale(1.08);
+      box-shadow: 0 0 80px rgba(57, 255, 20, 0.8);
+    }
 
-    .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
-    h2 {
-      font-size: 3rem;
+    .container { max-width: 1400px; margin: 0 auto; padding: 140px 20px; }
+    section h2 {
+      font-size: 4.5rem;
       text-align: center;
-      margin-bottom: 70px;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin-bottom: 90px;
+      background: var(--gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+    section h2::after {
+      content: ''; position: absolute; width: 150px; height: 6px; background: var(--gradient); bottom: -25px; left: 50%; transform: translateX(-50%); border-radius: 10px;
     }
 
-    .skills-grid, .projects-grid {
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin: 100px 0;
+      text-align: center;
+    }
+    .stat-item h3 { font-size: 3.5rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-item p { color: var(--text-muted); font-size: 1.2rem; }
+
+    /* Skills */
+    .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
+      gap: 35px;
     }
-    .skill-category, .project-card {
-      background: var(--card);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      border-radius: 20px;
-      padding: 30px;
+    .skill-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 45px 35px;
       text-align: center;
-      transition: all 0.5s;
+      border: 1px solid rgba(0,224,255,0.25);
+      transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
     }
-    .skill-category:hover, .project-card:hover {
-      transform: translateY(-15px);
-      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.25);
+    .skill-card:hover {
+      transform: translateY(-30px) rotateX(12deg);
+      box-shadow: 0 50px 100px rgba(0, 224, 255, 0.35);
     }
-    .project-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 16px;
-    }
-    .tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
-    .tag {
-      background: rgba(0, 212, 255, 0.15);
-      color: var(--primary);
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.85rem;
-    }
+    .skill-card i { font-size: 4.5rem; margin-bottom: 25px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-top: 50px;
+    /* Projects 3D Flip */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 50px;
     }
-    .contact-links a {
+    .project-card {
+      perspective: 2000px;
+    }
+    .project-inner {
+      position: relative;
+      width: 100%;
+      height: 520px;
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 28px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+    .project-card:hover .project-inner { transform: rotateY(180deg); }
+    .project-front, .project-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 28px;
+      overflow: hidden;
+    }
+    .project-front {
+      background: var(--bg-card);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,224,255,0.2);
+    }
+    .project-front img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(0,224,255,0.2);
+    }
+    .project-info { padding: 35px; }
+    .project-back {
+      background: linear-gradient(135deg, rgba(0,224,255,0.2), rgba(57,255,20,0.2));
+      transform: rotateY(180deg);
       display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 12px;
-      background: rgba(0, 212, 255, 0.1);
+      padding: 50px;
+      text-align: center;
+    }
+    .project-back a {
+      margin: 15px;
+      padding: 14px 34px;
+      background: #000;
       color: var(--primary);
-      padding: 16px 32px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: bold;
-      border: 2px solid transparent;
-      transition: all 0.4s;
+      transition: 0.4s;
     }
-    .contact-links a:hover {
-      background: var(--primary);
+    .project-back a:hover { background: var(--primary); color: #000; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 20px; }
+    .tag { background: rgba(0,224,255,0.15); color: var(--primary); padding: 8px 18px; border-radius: 50px; font-size: 0.9rem; }
+
+    /* Contact */
+    #contact form {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      gap: 25px;
+    }
+    #contact input, #contact textarea {
+      padding: 20px;
+      border: none;
+      border-radius: 20px;
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 1.1rem;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,224,255,0.25);
+    }
+    #contact button {
+      padding: 20px;
+      background: var(--gradient);
       color: #000;
-      border-color: var(--primary);
-      transform: translateY(-8px);
+      font-weight: bold;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1.3rem;
     }
 
-    footer { text-align: center; padding: 80px 20px; color: var(--text-light); }
+    footer { text-align: center; padding: 120px 20px 60px; color: var(--text-muted); font-size: 1.2rem; }
+    .heart { color: #ff006e; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.4); } }
 
     @media (max-width: 768px) {
-      .hero-content h1 { font-size: 3.2rem; }
-      .lang-switch { top: 10px; right: 10px; }
+      .hero h1 { font-size: 4rem; }
+      .typed-text { font-size: 1.6rem; }
+      section h2 { font-size: 3rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Language Switcher -->
-  <div class="lang-switch">
-    <button class="active" onclick="setLang('tg')">TG</button>
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+  <div id="particles-js"></div>
+
+  <div class="switcher">
+    <button onclick="setLang('tg')" class="active">TG</button>
     <button onclick="setLang('ru')">RU</button>
     <button onclick="setLang('en')">EN</button>
+    <button onclick="toggleTheme()" id="themeBtn">Dark Mode</button>
   </div>
 
   <header>
-    <div class="hero-content">
-      <h1>Алиҷон Алиҷон</h1>
-      <p data-tg="Full-Stack Developer • Python • React • Node.js" 
-         data-ru="Full-Stack разработчик • Python • React • Node.js"
-         data-en="Full-Stack Developer • Python • React • Node.js">
-        Full-Stack Developer • Python • React • Node.js
-      </p>
-      <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
-        <span data-tg="Лоиҳаҳоям" data-ru="Мои проекты" data-en="My Projects">Лоиҳаҳоям</span>
+    <div class="hero">
+      <h1>Алиҷон</h1>
+      <p>Full-Stack Developer • Тоҷикистон</p>
+      <div class="typed-text" id="typed"></div>
+      <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+        <span data-tg="Лоиҳаҳоям" data-ru="Мои проекты" data-en="My Projects">Лоиҳаҳоям</span> 
       </button>
     </div>
   </header>
 
   <div class="container">
 
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-item"><h3>4+</h3><p data-tg="Сол таҷриба" data-ru="Лет опыта" data-en="Years Experience">Сол таҷриба</p></div>
+      <div class="stat-item"><h3>40+</h3><p data-tg="Лоиҳаи анҷомшуда" data-ru="Завершенных проектов" data-en="Projects Completed">Лоиҳаи анҷомшуда</p></div>
+      <div class="stat-item"><h3>15+</h3><p data-tg="Мизоҷони хушнуд" data-ru="Довольных клиентов" data-en="Happy Clients">Мизоҷони хушнуд</p></div>
+      <div class="stat-item"><h3>24/7</h3><p data-tg="Дастгирии техникӣ" data-ru="Техподдержка" data-en="Support Available">Дастгирии техникӣ</p></div>
+    </div>
+
     <section id="about">
       <h2 data-tg="Дар бораи ман" data-ru="Обо мне" data-en="About Me">Дар бораи ман</h2>
-      <p class="about-text" style="text-align:center;font-size:1.3rem;max-width:900px;margin:0 auto;color:var(--text-light);"
-         data-tg="Салом! Ман Алиҷон, барномасози пуртаҷриба аз Душанбе. Дар тӯли 4 сол зиёда аз 30 лоиҳаи тиҷоратӣ ва стартапиро анҷом додам. Ман дӯст медорам кодҳои тоза ва зебо нависем."
-         data-ru="Привет! Я Алиджон, опытный разработчик из Душанбе. За 4 года реализовал более 30 коммерческих и стартап-проектов. Люблю писать чистый и красивый код."
-         data-en="Hi! I'm Alijon, an experienced developer from Dushanbe, Tajikistan. Over the past 4 years I've built 30+ commercial and startup projects. I love writing clean and beautiful code.">
-        Салом! Ман Алиҷон, барномасози пуртаҷриба аз Душанбе...
+      <p style="text-align:center;font-size:1.5rem;max-width:1000px;margin:0 auto;line-height:2;color:var(--text-muted););">
+        <span data-tg="Салом! Ман Алиҷон — Full-Stack барномасози пуртаҷриба аз Душанбе, Тоҷикистон. Дар тӯли 4+ сол зиёда аз 40 лоиҳаи тиҷоратӣ, стартап ва системаҳои мураккабро сохтам. Ман бо Python, React, Node.js, AI ва DevOps кор мекунам. Ҳадафам — сохтани маҳсулоти тез, бехатар ва зебо."
+              data-ru="Привет! Я Алиджон — Full-Stack разработчик из Душанбе. За 4+ года реализовал более 40 коммерческих проектов и стартапов. Работаю с Python, React, Node.js, AI и DevOps. Моя цель — создавать быстрые, безопасные и красивые продукты."
+              data-en="Hi! I'm Alijon — Full-Stack Developer from Dushanbe, Tajikistan. Built 40+ commercial & startup projects in 4+ years. Expert in Python, React, Node.js, AI & DevOps. I build fast, secure and beautiful digital products.">
+        </span>
       </p>
     </section>
 
     <section id="skills">
-      <h2 data-tg="Махоратҳо" data-ru="Навыки" data-en="Skills">Махоратҳо</h2>
+      <h2 data-tg="Технологияҳо" data-ru="Технологии" data-en="Technologies">Технологияҳо</h2>
       <div class="skills-grid">
-        <div class="skill-category"><i class="fab fa-python fa-3x" style="color:var(--primary);"></i><h3>Python</h3><p>Django, FastAPI, Flask, Scrapy</p></div>
-        <div class="skill-category"><i class="fab fa-react fa-3x" style="color:var(--primary);"></i><h3>React / Next.js</h3><p>TypeScript, Redux, Tailwind</p></div>
-        <div class="skill-category"><i class="fab fa-node-js fa-3x" style="color:var(--accent);"></i><h3>Node.js</h3><p>Express, NestJS, REST/GraphQL</p></div>
-        <div class="skill-category"><i class="fas fa-database fa-3x" style="color:var(--primary);"></i><h3>DevOps & DB</h3><p>Docker, PostgreSQL, Redis, AWS</p></div>
+        <div class="skill-card"><i class="fab fa-python"></i><h3>Python</h3><p>Django • FastAPI • Flask • Celery • Scrapy • Pandas • AI/ML</p></div>
+        <div class="skill-card"><i class="fab fa-react"></i><h3>React / Next.js</h3><p>TypeScript • Redux • Tailwind • Framer Motion • NextAuth</p></div>
+        <div class="skill-card"><i class="fab fa-node-js"></i><h3>Node.js</h3><p>NestJS • Express • GraphQL • Socket.io • Microservices</p></div>
+        <div class="skill-card"><i class="fas fa-server"></i><h3>DevOps</h3><p>Docker • Kubernetes • AWS • GitHub Actions • Nginx • Linux</p></div>
+        <div class="skill-card"><i class="fas fa-database"></i><h3>Базаҳо</h3><p>PostgreSQL • MongoDB • Redis • Elasticsearch • Supabase</p></div>
+        <div class="skill-card"><i class="fas fa-robot"></i><h3>AI & Automation</h3><p>LangChain • OpenAI • Telegram Bots • Web Scraping • RPA</p></div>
       </div>
     </section>
 
     <section id="projects">
-      <h2 data-tg="Лоиҳаҳои ман" data-ru="Мои проекты" data-en="Projects">Лоиҳаҳои ман</h2>
+      <h2 data-tg="Лоиҳаҳои интихоб" data-ru="Выбранные проекты" data-en="Selected Projects">Лоиҳаҳои интихоб</h2>
       <div class="projects-grid">
+
         <div class="project-card">
-          <img src="https://via.placeholder.com/600x400/0b1120/00d4ff?text=E-Commerce" alt="E-Commerce">
-          <div class="project-info">
-            <h3>E-Commerce платформа</h3>
-            <p data-tg="Магозаи онлайн бо пардохти электронӣ ва панели админ" data-ru="Интернет-магазин с оплатой и админкой" data-en="Online store with payment and admin panel">Магозаи онлайн бо пардохти электронӣ...</p>
-            <div class="tags"><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div>
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="E-Commerce">
+              <div class="project-info">
+                <h3>SmartShop — E-Commerce платформа</h3>
+                <p data-tg="Магозаи онлайн бо PWA, Stripe ва панели пурраи админ" data-ru="Интернет-магазин с PWA, Stripe и полной админкой" data-en="Full e-commerce with PWA, Stripe payments & admin dashboard"></p>
+                <div class="tags"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">Prisma</span><span class="tag">Stripe</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <h3>Live Demo</h3>
+              <a href="https://smartshop-tj.vercel.app" target="_blank">Дида бароед</a>
+              <a href="https://github.com/saymumin/smartshop" target="_blank">GitHub</a>
+            </div>
           </div>
         </div>
+
         <div class="project-card">
-          <img src="https://via.placeholder.com/600x400/0b1120/39ff14?text=Telegram+Bot" alt="Telegram Bot">
-          <div class="project-info">
-            <h3>Telegram бот барои бизнес</h3>
-            <p data-tg="Бот бо пардохт, CRM ва автоматикунонӣ" data-ru="Бот с оплатой, CRM и автоматизацией" data-en="Bot with payment, CRM and automation">Бот бо пардохт, CRM ва автоматикунонӣ</p>
-            <div class="tags"><span class="tag">Python</span><span class="tag">aiogram</span><span class="tag">FastAPI</span></div>
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Business Bot">
+              <div class="project-info">
+                <h3>ProBot — Telegram Business Assistant</h3>
+                <p data-tg="Бот бо пардохт, CRM, инвентар ва веб-панел" data-ru="Бот с оплатой, CRM, складом и веб-панелью" data-en="Business bot with payments, CRM, inventory & web dashboard"></p>
+                <div class="tags"><span class="tag">Python</span><span class="tag">aiogram 3</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <h3>Тест кунед</h3>
+              <a href="https://t.me/probot_tj_bot" target="_blank">@probot_tj_bot</a>
+              <a href="https://github.com/saymumin/probot" target="_blank">Код</a>
+            </div>
           </div>
         </div>
+
+        <div class="project-card">
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="FinTech">
+              <div class="project-info">
+                <h3>PayUz — FinTech платформа</h3>
+                <p data-tg="Системаи пардохт бо API барои бизнес" data-ru="Платёжная система с API для бизнеса" data-en="Payment gateway with business API"></p>
+                <div class="tags"><span class="tag">NestJS</span><span class="tag">React</span><span class="tag">Microservices</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <p>Лоиҳаи махфӣ (NDA)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1558655146-9f40138ed1cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="AI SaaS">
+              <div class="project-info">
+                <h3>AI Writer — Генератори матн</h3>
+                <p data-tg="SaaS бо OpenAI, пардохт ва панели корбар" data-ru="SaaS на OpenAI с оплатой и дашбордом" data-en="AI text generator SaaS with payments"></p>
+                <div class="tags"><span class="tag">Next.js</span><span class="tag">OpenAI</span><span class="tag">Stripe</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <a href="https://aiwriter-tj.vercel.app" target="_blank">Дида бароед</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1517180104938-7e87b5d7d2e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Dashboard">
+              <div class="project-info">
+                <h3>Analytics Dashboard</h3>
+                <p data-tg="Системаи таҳлил бо графикҳои зебо" data-ru="Аналитическая панель с красивыми графиками" data-en="Beautiful analytics dashboard"></p>
+                <div class="tags"><span class="tag">React</span><span class="tag">Recharts</span><span class="tag">Tailwind</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <a href="https://dashboard-saymumin.vercel.app" target="_blank">Demo</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-inner">
+            <div class="project-front">
+              <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Mobile App">
+              <div class="project-info">
+                <h3>Mobile App • React Native</h3>
+                <p data-tg="Барнома барои iOS ва Android" data-ru="Приложение для iOS и Android" data-en="Cross-platform mobile app"></p>
+                <div class="tags"><span class="tag">React Native</span><span class="tag">Expo</span><span class="tag">Firebase</span></div>
+              </div>
+            </div>
+            <div class="project-back">
+              <p>Дар App Store ва Play Market</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section id="contact">
       <h2 data-tg="Тамос" data-ru="Контакты" data-en="Contact">Тамос</h2>
-      <div class="contact-links">
-        <a href="https://t.me/saymumin_dev" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-        <a href="https://github.com/saymumin" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://linkedin.com/in/saymumin" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="mailto:saymumin@example.com"><i class="fas fa-envelope"></i> Email</a>
+      <form>
+        <input type="text" placeholder="Номи шумо" required>
+        <input type="email" placeholder="Email" required>
+        <textarea rows="6" placeholder="Паёми шумо..." required></textarea>
+        <button type="submit">Фиристодан</button>
+      </form>
+
+      <div style="text-align:center;margin-top:70px;">
+        <a href="https://t.me/saymumin_dev" target="_blank" style="margin:20px;font-size:2rem;color:var(--primary);"><i class="fab fa-telegram"></i></a>
+        <a href="https://github.com/saymumin" target="_blank" style="margin:20px;font-size:2rem;color:var(--primary);"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/saymumin" target="_blank" style="margin:20px;font-size:2rem;color:var(--primary);"><i class="fab fa-linkedin"></i></a>
       </div>
     </section>
 
   </div>
 
   <footer>
-    © 2025 Абдуллоев Саймумин • Бо ❤ аз Тоҷикистон сохта шуд
+    © 2025 Алиҷон • Бо <span class="heart">❤</span> аз Душанбе, Тоҷикистон сохта шуд
   </footer>
 
   <script>
-    // Забон иваз кардан
+    // Typed.js
+    new Typed('#typed', {
+      strings: ["Full-Stack Developer", "Python Expert", "React & Next.js", "Telegram Bot Master", "AI & Automation", "Тоҷикистон бо ❤"],
+      typeSpeed: 70,
+      backSpeed: 50,
+      backDelay: 1500,
+      loop: true
+    });
+
+    // Particles
+    particlesJS('particles-js', {
+      particles: { number: { value: 100 }, color: { value: '#00e0ff' }, shape: { type: 'circle' }, opacity: { value: 0.6 }, size: { value: 3 }, line_linked: { enable: true, distance: 150, color: '#00e0ff', opacity: 0.3, width: 1 }, move: { enable: true, speed: 2 } },
+      interactivity: { events: { onhover: { enable: true, mode: 'repulse' } } },
+      retina_detect: true
+    });
+
+    // Cursor
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    let posX = 0, posY = 0, mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+    function update() {
+      posX += (mouseX - posX) / 9;
+      posY += (mouseY - posY) / 9;
+      cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px';
+      follower.style.left = posX + 'px'; follower.style.top = posY + 'px';
+      requestAnimationFrame(update);
+    }
+    update();
+
+    // Language & Theme functions (ҳамон аз пештара)
     function setLang(lang) {
       document.querySelectorAll('[data-tg],[data-ru],[data-en]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
+        const key = `data-${lang}`;
+        if (el.hasAttribute(key)) el.textContent = el.getAttribute(key);
       });
-      document.documentElement.lang = lang === 'tg' ? 'tg' : lang === 'ru' ? 'ru' : 'en';
-      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
-      document.querySelector(`.lang-switch button[onclick="setLang('${lang}')"]`).classList.add('active');
+      document.documentElement.lang = lang === 'tg' ? 'tg' : lang;
+      document.querySelectorAll('.switcher button').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+    function toggleTheme() {
+      const isLight = document.body.getAttribute('data-theme') === 'light';
+      document.body.setAttribute('data-theme', isLight ? '' : 'light');
+      document.getElementById('themeBtn').textContent = isLight ? 'Dark Mode' : 'Light Mode';
     }
 
-    // Аниматсияҳо
-    ScrollReveal().reveal('section', { delay: 200, distance: '60px', origin: 'bottom', interval: 200 });
+    // ScrollReveal
+    ScrollReveal().reveal('section', { delay: 300, distance: '100px', origin: 'bottom', interval: 200 });
 
-    // Авто-детект забон аз браузер
-    const browserLang = navigator.language || navigator.userLanguage;
-    if (browserLang.includes('ru')) setLang('ru');
-    else if (browserLang.includes('tg')) setLang('tg');
-    else setLang('en');
+    // Auto detect language
+    const lang = (navigator.language || 'en').substr(0,2);
+    if (['ru','tg','en'].includes(lang)) setLang(lang);
   </script>
 </body>
 </html>
