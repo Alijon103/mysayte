@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Абдуллоев Саймумин – Full-Stack Developer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://unpkg.com/scrollreveal"></script>
+  <style>
+    :root {
+      --primary: #00d4ff;    /* кабуди неон */
+      --accent: #39ff14;     /* сабзи неон */
+      --bg: #0b1120;
+      --card: rgba(20, 25, 50, 0.6);
+      --text: #e0f2fe;
+      --text-light: #94b6cc;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: all 0.4s;
+    }
+
+    /* Language Switcher */
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(20,25,50,0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 8px;
+      border: 1px solid var(--primary);
+    }
+    .lang-switch button {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      padding: 8px 14px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #000;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(-45deg, #0b1120, #1e293b, #0f172a, #0b1120);
+      background-size: 400% 400%;
+      animation: gradient 15s ease infinite;
+      position: relative;
+    }
+    @keyframes gradient { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+
+    .hero-content h1 {
+      font-size: 4.8rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-content p {
+      font-size: 1.6rem;
+      color: var(--text-light);
+      margin: 20px 0 40px;
+    }
+    .btn {
+      padding: 16px 40px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.4s;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+    }
+    .btn:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 70px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .skills-grid, .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+    .skill-category, .project-card {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      transition: all 0.5s;
+    }
+    .skill-category:hover, .project-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 212, 255, 0.25);
+    }
+    .project-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    .tags { margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .tag {
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+    .contact-links a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      border: 2px solid transparent;
+      transition: all 0.4s;
+    }
+    .contact-links a:hover {
+      background: var(--primary);
+      color: #000;
+      border-color: var(--primary);
+      transform: translateY(-8px);
+    }
+
+    footer { text-align: center; padding: 80px 20px; color: var(--text-light); }
+
+    @media (max-width: 768px) {
+      .hero-content h1 { font-size: 3.2rem; }
+      .lang-switch { top: 10px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <button class="active" onclick="setLang('tg')">TG</button>
+    <button onclick="setLang('ru')">RU</button>
+    <button onclick="setLang('en')">EN</button>
+  </div>
+
+  <header>
+    <div class="hero-content">
+      <h1>Абдуллоев Саймумин</h1>
+      <p data-tg="Full-Stack Developer • Python • React • Node.js" 
+         data-ru="Full-Stack разработчик • Python • React • Node.js"
+         data-en="Full-Stack Developer • Python • React • Node.js">
+        Full-Stack Developer • Python • React • Node.js
+      </p>
+      <button class="btn" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">
+        <span data-tg="Лоиҳаҳоям" data-ru="Мои проекты" data-en="My Projects">Лоиҳаҳоям</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <section id="about">
+      <h2 data-tg="Дар бораи ман" data-ru="Обо мне" data-en="About Me">Дар бораи ман</h2>
+      <p class="about-text" style="text-align:center;font-size:1.3rem;max-width:900px;margin:0 auto;color:var(--text-light);"
+         data-tg="Салом! Ман Абдуллоев Саймумин, барномасози пуртаҷриба аз Душанбе. Дар тӯли 4 сол зиёда аз 30 лоиҳаи тиҷоратӣ ва стартапиро анҷом додам. Ман дӯст медорам кодҳои тоза ва зебо нависем."
+         data-ru="Привет! Я Абдуллоев Саймумин, опытный разработчик из Душанбе. За 4 года реализовал более 30 коммерческих и стартап-проектов. Люблю писать чистый и красивый код."
+         data-en="Hi! I'm Abdulloev Saymumin, an experienced developer from Dushanbe, Tajikistan. Over the past 4 years I've built 30+ commercial and startup projects. I love writing clean and beautiful code.">
+        Салом! Ман Абдуллоев Саймумин, барномасози пуртаҷриба аз Душанбе...
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2 data-tg="Махоратҳо" data-ru="Навыки" data-en="Skills">Махоратҳо</h2>
+      <div class="skills-grid">
+        <div class="skill-category"><i class="fab fa-python fa-3x" style="color:var(--primary);"></i><h3>Python</h3><p>Django, FastAPI, Flask, Scrapy</p></div>
+        <div class="skill-category"><i class="fab fa-react fa-3x" style="color:var(--primary);"></i><h3>React / Next.js</h3><p>TypeScript, Redux, Tailwind</p></div>
+        <div class="skill-category"><i class="fab fa-node-js fa-3x" style="color:var(--accent);"></i><h3>Node.js</h3><p>Express, NestJS, REST/GraphQL</p></div>
+        <div class="skill-category"><i class="fas fa-database fa-3x" style="color:var(--primary);"></i><h3>DevOps & DB</h3><p>Docker, PostgreSQL, Redis, AWS</p></div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 data-tg="Лоиҳаҳои ман" data-ru="Мои проекты" data-en="Projects">Лоиҳаҳои ман</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="https://via.placeholder.com/600x400/0b1120/00d4ff?text=E-Commerce" alt="E-Commerce">
+          <div class="project-info">
+            <h3>E-Commerce платформа</h3>
+            <p data-tg="Магозаи онлайн бо пардохти электронӣ ва панели админ" data-ru="Интернет-магазин с оплатой и админкой" data-en="Online store with payment and admin panel">Магозаи онлайн бо пардохти электронӣ...</p>
+            <div class="tags"><span class="tag">Next.js</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span></div>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/600x400/0b1120/39ff14?text=Telegram+Bot" alt="Telegram Bot">
+          <div class="project-info">
+            <h3>Telegram бот барои бизнес</h3>
+            <p data-tg="Бот бо пардохт, CRM ва автоматикунонӣ" data-ru="Бот с оплатой, CRM и автоматизацией" data-en="Bot with payment, CRM and automation">Бот бо пардохт, CRM ва автоматикунонӣ</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">aiogram</span><span class="tag">FastAPI</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 data-tg="Тамос" data-ru="Контакты" data-en="Contact">Тамос</h2>
+      <div class="contact-links">
+        <a href="https://t.me/saymumin_dev" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+        <a href="https://github.com/saymumin" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://linkedin.com/in/saymumin" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:saymumin@example.com"><i class="fas fa-envelope"></i> Email</a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2025 Абдуллоев Саймумин • Бо ❤ аз Тоҷикистон сохта шуд
+  </footer>
+
+  <script>
+    // Забон иваз кардан
+    function setLang(lang) {
+      document.querySelectorAll('[data-tg],[data-ru],[data-en]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+      });
+      document.documentElement.lang = lang === 'tg' ? 'tg' : lang === 'ru' ? 'ru' : 'en';
+      document.querySelectorAll('.lang-switch button').forEach(b => b.classList.remove('active'));
+      document.querySelector(`.lang-switch button[onclick="setLang('${lang}')"]`).classList.add('active');
+    }
+
+    // Аниматсияҳо
+    ScrollReveal().reveal('section', { delay: 200, distance: '60px', origin: 'bottom', interval: 200 });
+
+    // Авто-детект забон аз браузер
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang.includes('ru')) setLang('ru');
+    else if (browserLang.includes('tg')) setLang('tg');
+    else setLang('en');
+  </script>
+</body>
+</html>
